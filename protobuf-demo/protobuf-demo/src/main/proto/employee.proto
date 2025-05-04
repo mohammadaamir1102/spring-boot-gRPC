@@ -1,0 +1,173 @@
+syntax = "proto3"; // This tells Protobuf you’re using proto3 syntax (the latest major version).
+
+
+/**
+This is the protobuf package name.
+It helps organize your proto files and prevents name clashes.
+(It’s unrelated to your Java package but usually kept the same for clarity.)
+*/
+package com.aamir;
+
+
+
+/**
+java_multiple_files = true:
+➔ Protobuf will generate each message (Employee, Department) in its own .java file.
+(If false, everything goes inside a single outer class.)
+
+java_package = "com.aamir":
+➔ Sets the Java package for generated classes. This maps to your com.aamir package in Java.
+
+java_outer_classname = "EmployeeProto":
+➔ This is the name of the outer class if you don’t use java_multiple_files.
+(Even when java_multiple_files = true, it still generates a class named EmployeeProto as a container.)
+*/
+option java_multiple_files = true;
+option java_package = "com.aamir";
+option java_outer_classname = "EmployeeProto";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+// Department message
+message Department {
+  google.protobuf.Int64Value id = 1;
+  google.protobuf.StringValue name = 2;
+}
+
+// Employee message
+message Employee {
+  google.protobuf.Int64Value id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.DoubleValue salary = 3;
+  repeated Department departments = 4; // repeated is stands for List
+  map<string, string> addressMap = 5;
+  google.protobuf.BoolValue isActive = 6;
+  bytes profilePic = 7;
+  google.protobuf.Timestamp joiningDate = 8;
+}
+
+/*
+message EmployeeRequest{
+  int32 id=1;
+}
+*/
+
+message EmployeeList{
+  repeated Employee employees=1;
+}
+
+message Empty{
+}
+
+service EmployeeService{
+  // get employee by id
+  rpc getEmployee(Employee) returns (Employee);
+  // rpc getEmployeeById(EmployeeRequest) returns (Employee); // It used when we want to get employee by id by passing id in request like DTO etc.
+  // add an employee
+  rpc addEmployee(Employee) returns (Employee);
+  // Get all the employees
+  rpc getAllEmployees(Empty) returns (EmployeeList);
+
+}
+
+
+/**
+🔍 Why 1,2,3,4,5,6,7,8?
+In Protocol Buffers, every field has:
+
+A name ➔ e.g., id, name, salary
+
+A type ➔ e.g., int64, string, double
+
+A field number ➔ e.g., 1, 2, 3
+
+💡 The field number is the key thing in Protobuf serialization.
+
+The field numbers are used internally in the binary format (and sometimes in compact JSON-like output).
+
+{
+"id": 1,
+"name": "Aamir",
+"salary": 10000.00,
+"departments": [
+  {
+    "id": 1,
+    "name": "IT"
+  },
+  {
+    "id": 2,
+    "name": "HR"
+  }
+],
+"addressMap": {
+  "street": "abc",
+  "city": "xyz"
+},
+"isActive": true,
+"profilePic": "abc",
+"joiningDate": "2022-01-01T00:00:00Z"
+}
+
+
+--------------------------------------
+⚙️ Protobuf wire format (compact JSON-like):
+👉 In some Protobuf tools (or when debugging low-level output), you’ll see field numbers instead of names:
+
+{
+  "1": {
+    "value": "1"
+  },
+  "2": {
+    "value": "Aamir"
+  },
+  "3": {
+    "value": "10000.00"
+  },
+  "4": {
+    "1": {
+      "id": {
+        "value": "1"
+      },
+      "name": {
+        "value": "IT"
+      }
+    },
+    "2": {
+      "id": {
+        "value": "2"
+      },
+      "name": {
+        "value": "HR"
+      }
+    }
+  },
+  "5": {
+    "street": {
+      "value": "abc"
+    },
+    "city": {
+      "value": "xyz"
+    }
+  },
+  "6": {
+    "value": true
+  },
+  "7": {
+    "value": "abc"
+  },
+  "8": {
+    "seconds": {
+      "value": "1640995200"
+    },
+    "nanos": {
+      "value": "0"
+  }
+  }
+  }
+  }
+  }
+  }
+  }
+
+*/
