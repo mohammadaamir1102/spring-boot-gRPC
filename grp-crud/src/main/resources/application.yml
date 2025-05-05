@@ -1,0 +1,24 @@
+grpc:
+  server:
+    port: 8082
+    enable-reflection: true # by this way we can test through POSTMAN or any other third party client tools
+
+spring:
+  application:
+    name: grp-crud
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/grpc_crud
+    username: root
+    password: root
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect

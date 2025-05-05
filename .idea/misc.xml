@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/protobuf-demo/protobuf-demo/pom.xml" />
         <option value="$PROJECT_DIR$/protobuf-demo/pom.xml" />
         <option value="$PROJECT_DIR$/unary/stock-trading-server/pom.xml" />
+        <option value="$PROJECT_DIR$/grp-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/unary/stock-trading-client/pom.xml" />
       </list>
     </option>
   </component>

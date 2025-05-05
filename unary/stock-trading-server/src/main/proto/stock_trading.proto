@@ -1,28 +1,58 @@
-
+// This specifies that we are using proto3 (Protocol Buffers version 3).
 syntax = "proto3";
 
+// Define the package for your gRPC service. This is used for namespacing.
 package com.aamir;
-option  java_multiple_files=true;
-option java_package="com.aamir";
-option  java_outer_classname="StockTradingProto";
 
+// Option to generate **multiple Java files** (one per message/service) instead of one big file.
+option java_multiple_files = true;
 
-service StockTradingService{
+// Set the Java package where the generated classes will be placed.
+option java_package = "com.aamir";
 
-  // UNARY - RPC -> getting current stock price
-  rpc getStockPrice(StockRequest) returns (StockResponse);
+// The name of the outer class (used only if you don’t use java_multiple_files = true).
+option java_outer_classname = "StockTradingProto";
 
-  //server streaming
+/**
+ * The main gRPC service definition.
+ * 
+ * This is like your **Controller/Service Interface** in REST,
+ * where you define all the RPC methods.
+ */
+service StockTradingService {
 
+  // ✅ UNARY RPC method (Single Request -> Single Response)
+  //
+  // This method takes a StockRequest and returns a StockResponse.
+  // Example: You send { stock_symbol: "AAPL" }, and you get { stock_symbol: "AAPL", price: 173.5, timestamp: "2024-05-05 10:30" }.
+  rpc getStockPrice (StockRequest) returns (StockResponse);
+
+  // 🚧 Placeholder for server streaming (not yet implemented).
+  //
+  // For example: You could implement a method to continuously stream stock price updates.
+  //
+  // Example you might add in future:
+  // rpc streamStockPrices(StockRequest) returns (stream StockResponse);
 }
 
-message StockRequest{
-  string stock_symbol=1;
+/**
+ * Request message for `getStockPrice`.
+ */
+message StockRequest {
+  // The stock symbol you want the price for (e.g., "AAPL", "AMZN").
+  string stock_symbol = 1; // The `1` is the unique field number (must be unique within the message).
 }
 
-message StockResponse{
-  string stock_symbol=1;
-  double price=2;
-  string timestamp=3;
+/**
+ * Response message for `getStockPrice`.
+ */
+message StockResponse {
+  // Echoes the stock symbol (e.g., "AAPL").
+  string stock_symbol = 1;
 
+  // The current stock price (e.g., 173.50).
+  double price = 2;
+
+  // Timestamp when the price was fetched (e.g., "2024-05-05T10:30:00Z").
+  string timestamp = 3;
 }

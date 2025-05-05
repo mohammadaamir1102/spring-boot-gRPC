@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+// Java options for code generation
+
+
+// This option tells the compiler to generate multiple Java files:
+// one per message and service, rather than nesting all in a single file.
+option java_multiple_files = true;
+
+// Specifies the Java package where generated classes will reside.
+option java_package = "com.aamir";
+
+// Specifies the outer class name to contain all the generated classes
+// if multiple files are not used (acts as a wrapper).
+option java_outer_classname = "StudentProto";
+
+
+// Service definition
+service StudentService {
+
+  // Creates a new student record.
+  // Input: StudentRequest (contains id, name, email)
+  // Output: StudentResponse (returns created student details)
+  rpc createStudent(StudentRequest) returns (StudentResponse);
+
+  // Fetches a student by their ID.
+  // Input: StudentIdRequest (contains only the id)
+  // Output: StudentResponse (returns student details)
+  rpc getStudentById(StudentIdRequest) returns (StudentResponse);
+
+  // Retrieves all students from the system.
+  // Input: Empty message (no data needed)
+  // Output: StudentList (list of StudentResponse messages)
+  rpc getAllStudents(Empty) returns (StudentList);
+
+  // Deletes a student by their ID.
+  // Input: StudentIdRequest (contains only the id)
+  // Output: DeleteResponse (returns a message confirming deletion)
+  rpc deleteStudentById(StudentIdRequest) returns (DeleteResponse);
+
+  // Updates an existing student by their ID.
+  // Input: StudentRequest (contains id, name, email to be updated)
+  // Output: StudentResponse (returns updated student details)
+  rpc updateStudentById(StudentRequest) returns (StudentResponse);
+}
+
+// Request message for creating or updating a student
+message StudentRequest {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// Response message for a single student
+message StudentResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// List of students
+message StudentList {
+// Repeated field that holds multiple StudentResponse messages
+  repeated StudentResponse students = 1;
+}
+
+// Empty message used when no request data is needed
+message Empty {}
+
+// Request message containing student ID (for get or delete operations)
+message StudentIdRequest {
+  int64 id = 1;
+}
+
+message DeleteResponse {
+  // Confirmation message (e.g., "Student deleted successfully")
+  string message = 1;
+}
