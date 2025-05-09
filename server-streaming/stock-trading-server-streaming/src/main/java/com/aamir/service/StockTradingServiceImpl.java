@@ -9,6 +9,10 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.server.service.GrpcService;
 
+import java.time.Instant;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 /**
  * This is the implementation of the gRPC service defined in your proto file.
  *
@@ -62,5 +66,24 @@ public class StockTradingServiceImpl extends StockTradingServiceGrpc.StockTradin
 
         // ✅ Indicate that the response is complete.
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void streamStockPrices(StockRequest request, StreamObserver<StockResponse> responseObserver) {
+        String symbol = request.getStockSymbol();
+        try {
+            for (int i = 0; i <= 25; i++) { // simulate streaming 10 prices
+                StockResponse stockResponse = StockResponse.newBuilder()
+                        .setStockSymbol(symbol)
+                        .setPrice(new Random().nextDouble(200)) // set a random price
+                        .setTimestamp(Instant.now().toString()) // set the current timestamp
+                        .build();
+                responseObserver.onNext(stockResponse);
+                TimeUnit.SECONDS.sleep(1); // wait for 1 second before sending the next price
+            }
+            responseObserver.onCompleted(); // indicate that the stream is complete
+        } catch (Exception ex) {
+            responseObserver.onError(ex);
+        }
     }
 }

@@ -33,6 +33,7 @@ service StockTradingService {
   //
   // Example you might add in future:
   // rpc streamStockPrices(StockRequest) returns (stream StockResponse);
+  rpc streamStockPrices(StockRequest) returns (stream StockResponse);
 }
 
 /**
