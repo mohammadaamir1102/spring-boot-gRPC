@@ -80,9 +80,6 @@ public class StockTradingServiceImpl extends StockTradingServiceGrpc.StockTradin
                         .build();
                 responseObserver.onNext(stockResponse);
                 TimeUnit.SECONDS.sleep(1); // wait for 1 second before sending the next price
-                if (i == 5){
-                    throw new RuntimeException("Simulated error after 5 prices");
-                }
             }
             responseObserver.onCompleted(); // indicate that the stream is complete
         } catch (Exception ex) {
