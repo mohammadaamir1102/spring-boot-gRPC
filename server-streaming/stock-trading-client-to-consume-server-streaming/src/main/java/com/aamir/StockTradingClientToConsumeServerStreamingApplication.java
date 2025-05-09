@@ -18,6 +18,6 @@ public class StockTradingClientToConsumeServerStreamingApplication implements Co
 
 	@Override
 	public void run(String... args) {
-		System.out.println("Client Response: " + stockServiceClient.getStockPrice("AAPL"));
+		stockServiceClient.getStreamStockPrice("AAPL");
 	}
 }
