@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/unary/stock-trading-server/pom.xml" />
         <option value="$PROJECT_DIR$/grp-crud/pom.xml" />
         <option value="$PROJECT_DIR$/unary/stock-trading-client/pom.xml" />
+        <option value="$PROJECT_DIR$/server-streaming/stock-trading-server-streaming/pom.xml" />
+        <option value="$PROJECT_DIR$/server-streaming/stock-trading-client-to-consume-server-streaming/pom.xml" />
       </list>
     </option>
   </component>

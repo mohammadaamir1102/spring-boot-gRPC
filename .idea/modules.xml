@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/gRPC.iml" filepath="$PROJECT_DIR$/.idea/gRPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grp-crud/grp-crud.iml" filepath="$PROJECT_DIR$/grp-crud/grp-crud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unary/stock-trading-client/stock-trading-client.iml" filepath="$PROJECT_DIR$/unary/stock-trading-client/stock-trading-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/unary/stock-trading-server/stock-trading-server.iml" filepath="$PROJECT_DIR$/unary/stock-trading-server/stock-trading-server.iml" />
     </modules>
   </component>

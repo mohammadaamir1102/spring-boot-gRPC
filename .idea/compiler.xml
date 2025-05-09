@@ -3,6 +3,15 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="stock-trading-client-to-consume-server-streaming" />
+        <module name="stock-trading-client" />
+        <module name="stock-trading-server (1)" />
+        <module name="stock-trading-server" />
+      </profile>
       <profile name="Annotation profile for protobuf-demo" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -13,13 +22,6 @@
         <module name="grp-crud" />
         <module name="protobuf-demo" />
       </profile>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="stock-trading-server" />
-        <module name="stock-trading-client" />
-      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
@@ -27,7 +29,9 @@
       <module name="grp-crud" options="-parameters" />
       <module name="protobuf-demo" options="-parameters" />
       <module name="stock-trading-client" options="-parameters" />
+      <module name="stock-trading-client-to-consume-server-streaming" options="-parameters" />
       <module name="stock-trading-server" options="-parameters" />
+      <module name="stock-trading-server (1)" options="-parameters" />
     </option>
   </component>
 </project>
