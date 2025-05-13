@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: grpc-unary-ui-client
+server:
+  port: 8080
+
+grpc:
+  client:
+    stock-trading-server:
+      address: "static://localhost:9090"
+      negotiation-type: PLAIN_TEXT

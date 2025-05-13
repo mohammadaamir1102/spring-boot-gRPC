@@ -15,7 +15,7 @@ option java_outer_classname = "StockTradingProto";
 
 /**
  * The main gRPC service definition.
- *
+ * 
  * This is like your **Controller/Service Interface** in REST,
  * where you define all the RPC methods.
  */
